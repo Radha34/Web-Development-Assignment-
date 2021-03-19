@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>redirected</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    
+    
+</head>
+<body>
+<br>
+
+<div class="container" style:"border:1px solid #grey;">
+
+<p style:"align-items:center;"><h2>Congratulations! You have successfully registered.</h2></p>
+<br>
+  <div class="data">
+    <h4><p>Name: <label id="name"></label></p>
+    <h4><p>Gender: <label id="gender"></label></p>
+    <h4><p>Email: <lable id= "email"></label></p>
+    <h4><p>Contact: <lable id= "contact"></label></p>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+    var arr1 = new Array();
+    arr1 = JSON.parse(localStorage.getItem("localData"));
+
+    
+    for(i=0;i<arr1.length;i++){
+     document.getElementById('name').innerHTML = arr1[i].name;
+     document.getElementById('email').innerHTML = arr1[i].email;
+     document.getElementById('contact').innerHTML=arr1[i].contact;
+     document.getElementById('gender').innerHTML=arr1[i].gender;
+     document.getElementById('contact').innerHTML=arr1[i].contact;
+     }
+
+});
+
+
+</script>
+
+</body>
+</html>
