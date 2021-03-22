@@ -11,9 +11,9 @@
 
 <body style="display:block; padding:20px;">
 <div class="container">
-<form action="C:\Users\Radha\Desktop\ecommerce\redirect.html" method="post" id="myForm">
+<form action="C:\Users\Radha\Desktop\ecommerce\localstorage\redirect.html" method="post" id="myForm">
     
-    <input type="hidden" name="animal_id" id="animal_id">
+    
     <div class="form-row">
         <div class="col-md-6">
             <div class="form-group">
@@ -87,12 +87,11 @@
     var arr = new Array();
 
     function addData(){
+        console.log('page is ready');
         DeleteData();
         getData();
         
-        var cv = document.getElementById('weight').value;
-        cv = parseInt(cv);
-        document.getElementById('weight').value = cv;
+        
         arr.push({
             name:document.getElementById('name').value,
             password:document.getElementById('pwd').value,
