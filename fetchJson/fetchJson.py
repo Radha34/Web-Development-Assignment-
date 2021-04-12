@@ -37,7 +37,7 @@ print(type(df1))
 print(df1['name'])
 
          
-my_file = 'C:\\Users\\Radha\\sample4.json'
+my_file = 'https://github.com/Radha34/Web-Development-Assignment-/blob/main/fetchJson/sample4.json'
 df2 = pd.read_json(my_file)
 print("Loading json file usign read_json() method")
 print(type(df2))
