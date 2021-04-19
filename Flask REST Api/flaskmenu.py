@@ -1,91 +1,54 @@
-import urllib
-from urllib import request
+from flask import Flask,request
+from flask_restful import Resource, Api, abort
+import datetime
 
+app = Flask(__name__)
+api = Api(app)
 
-order = {}
-order['dish_name'] = 'Pizza'
-order['price'] = 200
-order['quantity'] = 2
-data = urllib.parse.urlencode(order)
-data = data.encode('ascii')
+orders = {}
 
-request2 = request.Request('http://127.0.0.1:5000/Orders/1', data=data, method='POST')
-try:
-    response2 = request.urlopen(request2)
-    print(response2.read())
-except urllib.error.HTTPError as e:
-    print(e.code, e.read())
+class OrdersAPI(Resource):
+    def get(self,order_id=None):
+        if order_id is None:
+            return orders
+        if order_id not in orders:
+            abort(404,message="Order_Id {} doesn't exist".format(order_id))   
+        return(order_id)
 
-order = {}
-order['dish_name'] = 'Pasta'
-order['price'] = 150
-order['quantity'] = 3
-data = urllib.parse.urlencode(order)
-data = data.encode('ascii')
-request3 = request.Request('http://127.0.0.1:5000/Orders/2', data=data, method='POST')
-try:
-    response3 = request.urlopen(request3)
-    print(response3.read())
-except urllib.error.HTTPError as e:
-    print(e.code, e.read())
+    def post(self,order_id):
+        if order_id not in orders:
+            order = {}
+            
+            order['dish_name'] = request.form['dish_name']
+            order['price'] = request.form['price']
+            order['quantity'] = request.form['quantity']
+            ordered_at = datetime.datetime.now()
+            order['ordered_at'] = ordered_at.strftime('%d-%m-%Y %H:%M:%S')
+            orders[order_id] = order
+            return orders[order_id]
+        abort(404, message="Order_Id {} already exists".format(order_id))         
 
-order = {}
-order['dish_name'] = 'Coke'
-order['price'] = 60
-order['quantity'] = 2
-data = urllib.parse.urlencode(order)
-data = data.encode('ascii')
-request4 = request.Request('http://127.0.0.1:5000/Orders/3', data=data, method='POST')
-try:
-    response4 = request.urlopen(request4)
-    print(response4.read())
-except urllib.error.HTTPError as e:
-    print(e.code, e.read())
+    def put(self,order_id):
+        if order_id in orders:
+            order = {}
+            
+            order['dish_name'] = request.form['dish_name']
+            order['quantity'] = request.form['quantity']
+            
+            orders[order_id].update(order)
+            return orders[order_id]
+        abort(404, message="Order_Id {} doesn't exist".format(order_id))    
 
+    def delete(self,order_id):
+        if order_id in orders:
+            response_string = 'Your order with order_id {} is deleted'.format(order_id)
+            del orders[order_id]
+            return response_string
+        abort(404,message="Order doesn't exist")        
 
-request5 = request.Request('http://127.0.0.1:5000/Orders/')
-try:
-    response5 = request.urlopen(request5)
-    print(response5.read())
-except urllib.error.HTTPError as e:
-    print(e.code, e.read())
+api.add_resource(OrdersAPI,
+              '/Orders/',
+              '/Orders/<int:order_id>')
 
-request6 = request.Request('http://127.0.0.1:5000/Orders/1')
-try:
-    response6 = request.urlopen(request6)
-    print(response6.read())
-except urllib.error.HTTPError as e:
-    print(e.code, e.read())
-
-request7 = request.Request('http://127.0.0.1:5000/Orders/2',method ='DELETE')
-try:
-    response7 = request.urlopen(request7)
-    print(response7.read())
-except urllib.error.HTTPError as e:
-    print(e.code,e.read())
-
-request8 = request.Request('http://127.0.0.1:5000/Orders/')
-try:
-    response8 = request.urlopen(request8)
-    print(response8.read())
-except urllib.error.HTTPError as e:
-    print(e.code,e.read())
-
-order = {}
-order['dish_name'] = "Pepsi"
-order['quantity'] = 2
-data = urllib.parse.urlencode(order)
-data = data.encode('ascii')
-request9 = request.Request('http://127.0.0.1:5000/Orders/3', data=data, method='PUT')
-try:
-    response9 = request.urlopen(request9)
-    print(response9.read())
-except urllib.error.HTTPError as e:
-    print(e.code, e.read())
-    
-request10 = request.Request('http://127.0.0.1:5000/Orders/')
-try:
-    response10 = request.urlopen(request10)
-    print(response10.read())
-except urllib.error.HTTPError as e:
-    print(e.code, e.read())                  
+if __name__ == '__main__':
+    app.run(debug = True)        
