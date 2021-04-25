@@ -21,20 +21,20 @@ details = ['Arun', 'Bang', 'Engineer', 'Computer','65,000','306','15']
 df['Details'] = details
 
 print(df.shape)
-#df2 = df.add_prefix('Emp_')
-df2 = df.transpose()
 
-df3 = df2.set_axis(['First_Name', 'Last_Name', 'Title','Division','Salary','Building','Room'], axis='columns')
-df3 = df3.set_axis(['Emp_1','Emp_2','Emp_3','Emp_4','Emp_5','Emp_6','Emp_7','Emp_8','Emp_9'],axis='index')
+emp_df = df.transpose()
+
+updated_emp_df = emp_df.set_axis(['First_Name', 'Last_Name', 'Title','Division','Salary','Building','Room'], axis='columns')
+updated_emp_df = updated_emp_df.set_axis(['Emp_1','Emp_2','Emp_3','Emp_4','Emp_5','Emp_6','Emp_7','Emp_8','Emp_9'],axis='index')
 print("\n Formatted columns and rows names :\n ")
-print(df3)
+print(updated_emp_df)
 print("\n Sorting the data acoording to highest employee salary \n")
-print(df3.sort_values(by='Salary', ascending=False))
+print(updated_emp_df.sort_values(by='Salary', ascending=False))
 
 print("\n Getting details of an employee by his name \n")
 
-filter_ = df3['First_Name'] == "Arun"
-print(df3[filter_])
+filter_ = updated_emp_df['First_Name'] == "Arun"
+print(updated_emp_df[filter_])
          
 #convert the dataframe to xml file
 def to_xml(df, filename=None, mode='w'):
@@ -52,5 +52,5 @@ def to_xml(df, filename=None, mode='w'):
         f.write(res)
 
 pd.DataFrame.to_xml = to_xml
-df.to_xml('foo.xml')
-print("\n Creating a new xml file with updated employee record -'foo.xml' ")
+df.to_xml('updated_emp_record.xml')
+print("\n Creating a new xml file with updated employee record -'updated_emp_record.xml' ")
