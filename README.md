@@ -9,8 +9,8 @@ Project Pre-requisites & Dependencies: python3.x postgresql pipenv
 
 flask flask sqlalchemy psycopg2 flask-migrate flask-script flask-bcrypt pyjwt manage requests
 
-pip install pipenv pipenv shell pipenv install flask flask-sqlalchemy psycopg2 flask-migrate flask-script marshmallow flask-bcrypt pyjwt manage
+pip install pipenv pipenv shell pipenv install flask flask-sqlalchemy psycopg2 flask-migrate flask-script flask-bcrypt pyjwt manage
 
-Run the following from your terminal (if windows, if linux change SET for $ export) SET PORT=5432 SET FLASK_ENV=development SET JWT_SECRET_KEY=admin SET DATABASE_URI=postgres://postgres:radha@localhost:5432/library 
+Run the following from your terminal (if windows, if linux change SET for $ export) SET PORT=5432 SET FLASK_ENV=development SET DATABASE_URI=postgres://postgres:radha@localhost:5432/library 
 
 Run the command python app.py 
