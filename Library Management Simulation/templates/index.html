@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% block content %}
+      <div class="container">
+         {% if message %}
+         <div class="alert">
+            <span class="closebtn-msg" onclick="this.parentElement.style.display='none';">&times;</span> 
+            {{ message }}
+          </div>
+          {%endif%}
+        <div class="grid-container-index">
+          <div class="grid-item-index">
+              <div class="card" style="min-height:100%;">
+                <img src="static/images/admin.jpg" class="avatar" style="width:100%; padding:10px;">
+                <div class="container">
+                  <h4><b></b></h4>
+                  <h4><button data-modal-target="#popup-a">Admin</button></h4>
+                </div>
+              </div>
+          </div>
+          <div class="grid-item-index">
+               <div class="card"  style="min-height:100%;">
+                <img src="static/images/teachers.jpg" class="avatar" style="width:100%; padding:10px;">
+                <div class="container">
+                 
+                  <p><button data-modal-target="#popup-t" onclick ="toggle()" >Teachers</button></p>
+                </div>
+              </div>
+          </div>
+          <div class="grid-item-index">
+              <div class="card" style="min-height:100%;">
+                <img src="static/images/students.jpg" class="avatar" style="width:100%; padding:10px;">
+                <div class="container">
+                  <h4><b></b></h4>
+                  <h4><button data-modal-target="#popup-s">Students</button></h4>
+                </div>
+              </div>
+          </div>
+          <div class="grid-item-index">
+               <div class="card">
+                <img src="static/images/guest.jpg" class="avatar" style="width:100%;">
+                <div class="container">
+                  <h4><b></b></h4>
+                  <p><button data-modal-target="#popup-g">Guests</button></p>
+                </div>
+              </div>
+          </div>
+          
+        </div>   
+          <div class="reg-link">
+            <p>Don't have an account? <a href="http://127.0.0.1:5000/register">Create one</a></p>
+          </div>
+        <div class="popup" id="popup-s">
+          <div class="modal-header">
+            <div class="grid-item" style="width:100%;">
+              <div class="signup-form" style="margin:0px; display:block; text-align:center;">
+                <i class="fas fa-users fa-3x" style="padding-bottom:5px;"></i> <button data-close-button class="close-btn">&times;</button>
+                  <h2 class="form-title">Login</h2>
+                    <form action="{{ url_for('student')}}" method="post" style="display:inline-block; text-align:center;">
+                        <div class="form-group" style="margin-left:50px; width:400px;">
+                          <label for="email"><i class="fas fa-user"></i></label>
+                          <input type="email" name="email" id="email" placeholder="Your Email"/>
+                        </div>
+                        <div class="form-group" style="margin:0px; margin-left:50px; width:400px;">
+                            <label for="pass"><i class="fas fa-lock"></i></label>
+                            <input type="password" name="pass" id="pass" placeholder="Password"/>
+                        </div>   
+                        <div class="form-group" style="padding:3px; height:50px; text-align:left; margin-left:50px; margin-bottom:5px;">
+                          <a href="#" style="font-size:14px;">Forgot your password?</a>
+                        </div>                     
+                        <div class="form-groupbtn" style="margin-left: 230px; margin-right:0px; margin-top:0px;">                          
+                              <input type="submit" name="signup" id="signup" class="form-submit" value="Login"/>
+                        </div> 
+                    </form>
+              </div>
+            </div>
+          </div>  
+        </div>
+        <div class="popup" id="popup-t">
+          <div class="modal-header">
+            <div class="grid-item" style="width:100%;">
+              <div class="signup-form" style="margin:0px; display:block; text-align:center;">
+                <i class="fas fa-chalkboard-teacher fa-3x" style="padding-bottom:5px;"></i> <button data-close-button class="close-btn">&times;</button>
+                  <h2 class="form-title">Login</h2>
+                    <form action="{{ url_for('teacher')}}" method="post" style="display:inline-block; text-align:center;">
+                        <div class="form-group" style="margin-left:50px; width:400px;">
+                          <label for="email"><i class="fas fa-user"></i></label>
+                          <input type="email" name="email" id="email" placeholder="Your Email"/>
+                        </div>
+                        <div class="form-group" style="margin:0px; margin-left:50px; width:400px;">
+                            <label for="pass"><i class="fas fa-lock"></i></label>
+                            <input type="password" name="pass" id="pass" placeholder="Password"/>
+                        </div>   
+                        <div class="form-group" style="padding:3px; height:50px; text-align:left; margin-left:50px; margin-bottom:5px;">
+                          <a href="#" style="font-size:14px;">Forgot your password?</a>
+                        </div>                     
+                        <div class="form-groupbtn" style="margin-left: 230px; margin-right:0px; margin-top:0px;">                          
+                              <input type="submit" name="signup" id="signup" class="form-submit" value="Login"/>
+                        </div> 
+                    </form>
+              </div>
+            </div>
+          </div>  
+        </div>  
+        <div class="popup" id="popup-a">
+          <div class="modal-header">
+            <div class="grid-item" style="width:100%;">
+              <div class="signup-form" style="margin:0px; display:block; text-align:center;">
+                <i class="fas fa-user fa-3x" style="padding-bottom:5px;"></i> <button data-close-button class="close-btn">&times;</button>
+                  <h2 class="form-title">Login</h2>
+                    <form action="{{ url_for('admin')}}" method="post" style="display:inline-block; text-align:center;">
+                        <div class="form-group" style="margin-left:50px; width:400px;">
+                          <label for="email"><i class="fas fa-user"></i></label>
+                          <input type="email" name="email" id="email" placeholder="Your Email"/>
+                        </div>
+                        <div class="form-group" style="margin:0px; margin-left:50px; width:400px;">
+                            <label for="pass"><i class="fas fa-lock"></i></label>
+                            <input type="password" name="pass" id="pass" placeholder="Password"/>
+                        </div>   
+                        <div class="form-group" style="padding:3px; height:50px; text-align:left; margin-left:50px; margin-bottom:5px;">
+                          <a href="#" style="font-size:14px;">Forgot your password?</a>
+                        </div>    
+                                            
+                        <div class="form-groupbtn" style="margin-left: 230px; margin-right:0px; margin-top:0px;">                          
+                            <button type="submit" name = "form_type" id ="form_type" class="btn btn-primary" value="Login">Login</button>
+                        </div> 
+                        
+                    </form>
+              </div>
+            </div>
+          </div>  
+        </div>  
+        <div class="popup" id="popup-g">
+          <div class="modal-header">
+            <div class="grid-item" style="width:100%;">
+              <div class="signup-form" style="margin:0px; display:block; text-align:center;">
+                <i class="fas fa-user fa-3x" style="padding-bottom:5px;"></i> <button data-close-button class="close-btn">&times;</button>
+                  <h2 class="form-title">Guest Login</h2>
+                    <form action="{{ url_for('guest')}}" method="post" style="display:inline-block; text-align:center;">
+                        <div class="form-group" style="margin-left:50px; width:400px;">
+                          <label for="email"><i class="fas fa-envelope"></i></label>
+                          <input type="email" name="email" id="email" placeholder="Your Email"/>
+                        </div>
+                        <div class="form-group" style="margin:0px; margin-left:50px; width:400px;">
+                            <label for="name"><i class="fas fa-user"></i></label>
+                            <input type="text" name="name" id="name" placeholder="Your Name"/>
+                        </div>   
+                         
+                        <div class="form-group" style="display:none;">
+                          <label for="adminlogin" class="col-sm-2 col-form-label" >form_type</label>
+                          <div class="col-sm-6">
+                            <input type="text" class="form-control" name ="form_type" id="form_type" value="adminform">
+                          </div>
+                        </div>                      
+                        <div class="form-groupbtn" style="margin-left: 230px; margin-right:0px; margin-top:10px;">                          
+                              <input type="submit" name="guest" id="guest" class="form-submit" value="Login"/>
+                        </div> 
+                        
+                    </form>
+              </div>
+            </div>
+          </div>  
+        </div>    
+        
+        <div id="overlay"></div>
+                
+      </div>       
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+      
+            <p>{{message}}</p>
+      <div class="grid-container"style="padding-top:0;">
+      
+        <div class="grid-item" >
+          <div class="signup-form">
+            <h2 class="form-title">Sign up</h2>
+            <form action="{{ url_for('submit')}}" method="POST">
+                    
+                  <div class="form-group">
+                       <label for="name"><i class="fas fa-user"></i></label>
+                       <input type="text" name="name" id="name" placeholder="Your Name"/>
+                  </div>
+                  <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i></label>
+                        <input type="email" name="email" id="email" placeholder="Your Email"/>
+                  </div>
+                  <div class="form-group">
+                        <label for="pass"><i class="fas fa-user-lock"></i></label>
+                        <input type="password" name="pass" id="pass" placeholder="Password"/>
+                  </div>
+                  <div class="form-group">
+                        <label for="re-pass"><i class="fas fa-lock"></i></label>
+                        <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                  </div>
+                  <div class="form-group">
+                        <label for="category"><i class="fas fa-user"></i></label>
+                        <input type="text" name="category" id="category" placeholder="Teacher or Student"/>
+                  </div>
+                                     
+                  <div class="form-groupbtn">                          
+                        <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                  </div> 
+            </form>
+          </div>
+        </div>     
+        <div class="grid-item" style="padding-top:70px;">
+          <div class="signup-img">
+                <figure>
+                <img src="static/images/register.png">
+                </figure>
+          </div>
+        </div>
+      </div>
+{% endblock %}
+
+<!--<div class="form-group">
+                      {{ form.username.label}}
+                      {{form.username(size=30)}}
+                      </div>
+                      <div class="form-group">
+                      {{ form.password.label}} <br>
+                      {{form.password(size=30)}}
+                      </div>
+                      <div class="form-group form-button">
+                      {{ form.submit()}}          
+                      </div>-->
+    

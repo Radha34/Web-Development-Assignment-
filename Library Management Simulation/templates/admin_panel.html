@@ -1,0 +1,373 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="grid-container-admin">
+  <!--<p style="text-align:center;">{{message}}<p>-->
+  <div class="grid-item-admin" style="background-color:#ccefff; margin-top:0; margin-left:0; height:100%;">
+      <div class="profile-sidebar">
+            <!-- SIDEBAR USER MENU -->
+            <div class="profile-usertitle" style="margin-top:5px;">
+              <h4 style="text-align:center; margin-top:5px;"><i class="fas fa-user-circle mr-3" aria-hidden="true" style="font-size:25px;"></i>Welcome, Admin</h4>          
+            </div>
+            <hr style="margin-top:0;">            
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-dashboard-tab" data-toggle="pill" href="#v-pills-dashboard" role="tab"
+                  aria-controls="v-pills-dashboard" aria-selected="true" style="color:black;"><i class="fas fa-columns mr-3"></i><span id="menusidenav">Dashboard</span></a>
+                <div class="sidenav">               
+                    <div class="dropdown-btn"><i class="fas fa-book mr-3"></i><span id="menusidenav">Books<span>
+                      <i class="fa fa-caret-down"></i>
+                    </div>
+                    <div class="dropdown-container">
+                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                          <a class="nav-link" id="v-pills-books-tab" data-toggle="pill" href="#v-pills-books" role="tab"
+                            aria-controls="v-pills-books" aria-selected="false" style="color:black;"><span id="menusidenavdrp">All Books</span></a>
+                          <a class="nav-link" id="v-pills-add-books-tab" data-toggle="pill" href="#v-pills-add-books" role="tab"
+                            aria-controls="v-pills-add-books" aria-selected="false" style="color:black;"><span id="menusidenavdrp">Add Books</span></a>
+                        </div>
+                    </div>                
+                </div>
+                <div class="sidenav">               
+                    <div class="dropdown-btn"><i class="far fa-sticky-note mr-3"></i><span id="menusidenav">Question Papers 
+                      </span><i class="fa fa-caret-down"></i>
+                    </div>
+                    <div class="dropdown-container">
+                      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link" id="v-pills-queppr-tab" data-toggle="pill" href="#v-pills-queppr" role="tab"
+                          aria-controls="v-pills-queppr" aria-selected="false" style="color:black;"><span id="menusidenavdrp">All Question Papers</span></a>
+                        <a class="nav-link" id="v-pills-add-que-ppr-tab" data-toggle="pill" href="#v-pills-add-que-ppr" role="tab"
+                          aria-controls="v-pills-add-queppr" aria-selected="false" style="color:black;"><span id="menusidenavdrp">Add Question Papers</span></a>
+                      </div>
+                    </div>                
+                </div>  
+                <a class="nav-link" id="v-pills-students-tab" data-toggle="pill" href="#v-pills-students" role="tab"
+                  aria-controls="v-pills-students" aria-selected="false" style="color:black;"><i class="fas fa-users mr-3"></i><span id="menusidenav">Students</span></a>
+                <a class="nav-link" id="v-pills-teachers-tab" data-toggle="pill" href="#v-pills-teachers" role="tab"
+                  aria-controls="v-pills-teachers" aria-selected="false" style="color:black;"><i class="fas fa-chalkboard-teacher mr-3"></i><span id="menusidenav">Teachers</span></a>
+                <a class="nav-link" id="v-pills-guests-tab" data-toggle="pill" href="#v-pills-guests" role="tab"
+                  aria-controls="v-pills-guests" aria-selected="false" style="color:black;"><i class="fas fa-user-secret mr-3"></i><span id="menusidenav">Guests</span></a>
+                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
+                  aria-controls="v-pills-settings" aria-selected="false" style="color:black;"><i class="fas fa-users-cog mr-3"></i><span id="menusidenav">Settings</span></a>            
+                <a class="nav-link" href="http://127.0.0.1:5000/" 
+                  style="color:black;"><i class="fas fa-power-off mr-3"></i><span id="menusidenav">Logout</span></a>              
+            </div>
+            <!-- END MENU -->
+      </div>
+  </div>
+  <div class="grid-item-admin">
+    <div class="profile-content tab-content" id="v-pills-tabContent" style="border:2px solid #A6DEF5; border-radius:20px;">
+            <!--Dashboard Details-->
+            <div class="tab-pane fade show active" id="v-pills-dashboard" role="tabpanel" aria-labelledby="v-pills-dashboard-tab" style="height:607px;">
+              <div class="grid-container-dashboard">
+                <div class="grid-item" id="grid-item-dashboard">
+                  <div class="card text-white mb-3" style="background-color:#51AFFA;">
+                      <div class="card-body">
+                      <div class="card-text">{{book_count}} BOOKS <i class="fas fa-book ml-2" style="padding:0px; color: #077edf; font-size:30px;"></i></div>
+                      <h5 class="card-title"></h5>
+                      <!--<p class="card-text">Some quick example text to build on the card title.</p>-->
+                    </div>
+                  </div>
+                </div>
+                <div class="grid-item" id="grid-item-dashboard">
+                  <div class="card text-white mb-3" style=" background-color:#1aa3ff;">                  
+                    
+                    <div class="card-body">
+                      <div class="card-text">{{student_count}} STUDENTS <i class="fas fa-users ml-2" style="padding:5px; color: #077edf; font-size:30px;"></i></div>
+                      <h5 class="card-title"></h5>
+                      <!--<p class="card-text">Some quick example text to build on the card title.</p>-->
+                    </div>
+                  </div>
+                </div>
+                <div class="grid-item" id="grid-item-dashboard">
+                  <div class="card text-white mb-3" style=" background-color:#51AFFA;">                  
+                    <div class="card-body">
+                      <div class="card-text">{{ teachers_count}} TEACHERS <i class="fas fa-chalkboard-teacher ml-2" style="padding:0px; color: #077edf; font-size:30px;"></i></div>
+                      <h5 class="card-title"></h5>
+                      <!--<p class="card-text">Some quick example text to build on the card title.</p>-->
+                    </div>
+                  </div>
+                </div>  
+                <div class="grid-item" id="grid-item-dashboard">
+                  <div class="card text-white mb-3" style="min-width: 12rem; background-color:#51AFFA;">                
+                    <div class="card-body">
+                      <div class="card-text">{{que_ppr_count}} QUE PAPERS <i class="fas fa-chalkboard-teacher ml-2" style="padding:0px; color: #077edf; font-size:30px;"></i></div>
+                      <h5 class="card-title"></h5>
+                      <!--<p class="card-text">Some quick example text to build on the card title.</p>-->
+                    </div>
+                  </div>
+                </div>
+                <div class="grid-item" id="grid-item-dashboard">
+                  <div class="card text-white mb-3" style="min-width: 12rem; background-color:#51AFFA;">                
+                    <div class="card-body">
+                      <div class="card-text">{{guests_count}} GUESTS VISITED<i class="fas fa-user-secret ml-4" style="padding:0px; color: #077edf; font-size:30px;"></i></div>
+                      <h5 class="card-title"></h5>
+                      <!--<p class="card-text">Some quick example text to build on the card title.</p>-->
+                    </div>
+                  </div>
+                </div>
+                <div class="grid-item" id="grid-item-dashboard">
+                  <div class="card text-white mb-3" style=" background-color:#51AFFA;">                  
+                    <div class="card-body">
+                      <div class="card-text">{{issued_books_count}} ISSUED BOOKS<i class="fas fa-book ml-2" style="padding:0px; color: #077edf; font-size:30px;"></i></div>
+                      <h5 class="card-title"></h5>
+                      <!--<p class="card-text">Some quick example text to build on the card title.</p>-->
+                    </div>
+                  </div>
+                </div>  
+                 
+              </div>
+            </div>
+            <!--Books-->
+            <div class="tab-pane fade" id="v-pills-books" role="tabpanel" aria-labelledby="v-pills-books-tab" style="max-height:607px;overflow-y:auto;">
+            <p style="text-align:center;"><b>BOOKS</b></p>
+            <hr>                       
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Sr.No.</th>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Available</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                {% for book in books %}
+                <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{book.isbn}}
+                </td>
+                <td>{{book.author}}
+                </td>
+                <td>{{book.title}}
+                </td>
+                <td>{{book.category}}
+                </td>
+                <td>{{book.count}}
+                </td>
+                <td>
+                   <a href="/deletebook/{{book.isbn}}/">
+                  Delete book </a>
+                </td>
+                </tr>
+                {% endfor %}
+              </table>
+    
+            </div>
+            <!--Add Books-->
+            <div class="tab-pane fade" id="v-pills-add-books" role="tabpanel" aria-labelledby="v-pills-add-books-tab" style="height:607px;" >
+              <div class="add-book-form">
+                <form action="" method="POST" name="bookform"> 
+                  <div class="row mb-3">
+                    <label for="isbn" class="col-sm-2 col-form-label">ISBN</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name = "isbn" id="isbn">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="author" class="col-sm-2 col-form-label">Title</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name="author" id="author">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="title" class="col-sm-2 col-form-label">Author</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name="title" id="title">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="category" class="col-sm-2 col-form-label">Category</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name = "category" id="category">
+                    </div>
+                  </div>    
+                  <div class="row mb-3">
+                    <label for="count" class="col-sm-2 col-form-label" >Count</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name ="count" id="count">
+                    </div>
+                  </div>    
+                  <div class="row mb-3" style="display:none;">
+                    <label for="count" class="col-sm-2 col-form-label" >form_type</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name ="form_type" id="form_type" value="bookform">
+                    </div>
+                  </div>     
+                    
+                  <button type="submit" name = "BookSubmit" class="btn btn-primary">Add Book</button>
+                </form>
+              </div>
+            </div>
+             <!--QUESTION PAPERS-->
+             <div class="tab-pane fade" id="v-pills-queppr" role="tabpanel" aria-labelledby="v-pills-queppr-tab" style="height:607px;">
+              <p style="text-align:center;"><b>QUESTION PAPERS</b></p>
+                <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Sr.No.</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Exam</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                {% for q_ppr in que_ppr %}
+                <tr>
+                <th scope="row">{{q_ppr.id}}</th>
+                <td>{{q_ppr.subject}}
+                </td>
+                <td>{{q_ppr.exam}}
+                </td>
+                <td>{{q_ppr.year}}
+                </td>
+                <td>
+                   <a href="/admin/{{q_ppr.id}}">
+                  Delete que_ppr {{q_ppr.id}}</a>
+                </td>
+                </tr>
+                {% endfor %}
+              </table>
+            </div>
+             <!--Add Question Paper-->
+            <div class="tab-pane fade" id="v-pills-add-que-ppr" role="tabpanel" aria-labelledby="v-pills-add-que-ppr-tab" style="height:607px;"><b style="color:black;"></b>
+                <div class="add-book-form">
+                   <form action="{{url_for('admin')}}" method="POST" enctype="multipart/form-data"> 
+                  <div class="row mb-3">
+                    <label for="subject" class="col-sm-2 col-form-label">Subject</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name = "subject" id="subject">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="exam" class="col-sm-2 col-form-label">Exam</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name="exam" id="exam">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="year" class="col-sm-2 col-form-label">Year</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name="year" id="year">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="file" class="col-sm-2 col-form-label">File</label>
+                    <div class="col-sm-4">
+                      <input type="file" class="form-control" name = "file" id="file">
+                    </div>
+                  </div> 
+                  <button type="submit" name = "form_type" id ="form_type" class="btn btn-primary" value="Add Question Paper">Add Question Paper</button>
+                </form>
+                </div>
+            </div>
+            <!--Students -->
+            <div class="tab-pane fade" id="v-pills-students" role="tabpanel" aria-labelledby="v-pills-students-tab" style="height:607px;">
+              <p style="text-align:center;"><b>STUDENTS</b></p>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Sr.No.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    
+                    
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                {% for student in students %}
+                <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{student.name}}
+                </td>
+                <td>{{student.email}}
+                </td>
+               
+                <td>                
+                   <a href="/admin/{{student.id}}/">
+                  Remove Student </a>
+                </td>
+                </tr>
+                {% endfor %}
+              </table>
+    
+            </div>
+           
+            <!--Teachers-->
+            <div class="tab-pane fade" id="v-pills-teachers" role="tabpanel" aria-labelledby="v-pills-teachers-tab" style="height:607px;">
+            <p style="text-align:center;"><b>TEACHERS</b></p>
+                <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Sr.No.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                {% for teacher in teachers %}
+                <tr>
+                <th scope="row">{{loop.index}}</th>                
+                <td>{{teacher.name}}
+                </td>
+                <td>{{teacher.email}}
+                </td>
+             
+                <td> 
+                   <a href="/admin/{{teacher.email}}">
+                  Remove Teacher </a>
+                </td>
+                </tr>
+                {% endfor %}
+              </table>
+               
+            </div>
+            <!--Guests-->
+            <div class="tab-pane fade" id="v-pills-guests" role="tabpanel" aria-labelledby="v-pills-guests-tab" style="height:607px;">
+              <p style="text-align:center;"><b>GUESTS</b></p>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Sr.No.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>                  
+                    
+                  </tr>
+                </thead>
+                {% for guest in guests %}
+                <tr>
+                <th scope="row">{{loop.index}}</th>
+                
+                <td>{{guest.name}}
+                </td>
+                <td>{{guest.email}}
+                </td>
+                
+                
+                </tr>
+                {% endfor %}
+              </table>
+               
+
+            </div>
+            <!--Settings-->
+            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" style="height:607px;" >
+            
+            <p style="text-align:center;"><b>SETTINGS</b></p>
+            <div>
+              <p style="text-align:center;">Hello Admin</p>
+              <p style="text-align:center;">Your registered id: admin@gmail.com</p>
+              <p style="text-align:center;">To change admin password contact the college administartion.</p>
+            </div>
+            </div>
+            
+           
+          </div>
+  </div>
+</div>
+
+
+{%endblock%}
+    
+ 

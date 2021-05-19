@@ -1,0 +1,184 @@
+ {% extends 'base.html' %}
+{% block content %}
+
+    <div class="container_student" style="background-color:none;">
+        <ul class="nav nav-pills nav-justified" style="background-color:#ccefff; margin-top:10px;">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" id="v-pills-books-tab" data-toggle="pill" href="#v-pills-books"
+                aria-controls="v-pills-books" aria-selected="true" style="color:black;">Books</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="v-pills-issued-books-tab" data-toggle="pill" href="#v-pills-question-ppr"
+                aria-controls="v-pills-question-ppr" aria-selected="false" style="color:black;">Question Papers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="v-pills-issued-books-tab" data-toggle="pill" href="#v-pills-issued-books"
+                aria-controls="v-pills-issued-books" aria-selected="false" style="color:black;">Issued Books</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  My Profile
+                </a>
+                <div class="nav-item dropdown-menu" style="width:100%;" aria-labelledby="navbarDropdown">
+                <a class="nav-item dropdown-item" id="v-pills-settings-student-tab" data-toggle="pill" href="#v-pills-profile">Settings</a>
+                <a class="nav-item dropdown-item" href="{{url_for('index')}}">Logout</a>
+               </div>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="container">
+      <div class="profile-content tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade" id="v-pills-books" role="tabpanel" aria-labelledby="v-pills-books-tab" style="height:607px;" >
+        <p style="text-align:center;"><b>BOOKS</b> </p>
+              <table class="table">
+                <thead>
+                  <tr>        
+                    <th scope="col">Sr.No.</th>            
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Available</th>
+                    <th scope="col">Issue</th>
+                  </tr>
+                </thead>
+                {% for book in books %}
+                <tr>
+                 <th scope="row">{{loop.index}}</th>
+                <td>{{book.isbn}}
+                </td>
+                <td>{{book.author}}
+                </td>
+                <td>{{book.title}}
+                </td>
+                <td>{{book.category}}
+                </td>
+                <td>{{book.count}}
+                </td>
+                <td>         
+                             
+                  <a href="/studentissuedbook/{{book.isbn}}/{{student.id}}/">
+                  Issue </a>                 
+                </td>
+                </tr>
+                {% endfor %}
+              </table>
+              <span style="justify-content:right;"><a href="/downloadbooklist" class="btn btn-primary">Download book list</a></span>
+        </div>
+        <div class="tab-pane fade" id="v-pills-question-ppr" role="tabpanel" aria-labelledby="v-pills-question-ppr-tab" style="height:607px;" >
+        <p style="text-align:center;"><b>QUESTION PAPERS</b> </p>
+          <div class="container">
+            
+            <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <div class="container-fluid">
+                <a class="navbar-brand" href="#">Navbar</a>
+                  <form class="d-flex" style="width:90%;">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                  </form>
+              </div>   
+            </nav> -->     
+            <div class="container-fluid">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Sr.No.</th>
+                      <th scope="col">Subject</th>
+                      <th scope="col">Exam</th>
+                      <th scope="col">Year</th>
+                      <th scope="col">Download Paper</th>
+                    </tr>
+                  </thead>
+                  {% for q_ppr in que_ppr %}
+                  <tr>
+                  <th scope="row">{{loop.index}}</th>
+                  <td>{{q_ppr.subject}}
+                  </td>
+                  <td>{{q_ppr.exam}}
+                  </td>
+                  <td>{{q_ppr.year}}
+                  </td>
+                  <td><a href="/return-files/{{q_ppr.file}}" target="blank"><button class='btn btn-primary'>Download</button></a>
+                  </td>
+                  </tr>
+                  {% endfor %}
+                </table>
+              </div>
+          
+          </div>
+        </div>
+        <div class="tab-pane fade" id="v-pills-issued-books" role="tabpanel" aria-labelledby="v-pills-issued-books-tab" style="height:607px;">
+        <p style="text-align:center;"><b>ISSUED BOOKS</b> </p>
+              <table class="table">
+                <thead>
+                  <tr>        
+                              
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Issue Date</th>
+                    <th scope="col">Return Date</th>
+                    <th scope="col">Fine</th>
+                    <th scope="col">Re-Issue</th>
+                  </tr>
+                </thead>
+                {% for book in issued_books %}
+                  
+                  {% if book.userID == student.id %}
+                <tr>     
+                          
+                <td>{{book.BookIsbn}}
+                </td>
+                <td>{{book.BookTilte}}
+                </td>
+                <td>{{book.IssueDate}}
+                </td>
+                <td>{{book.ExpRetDate}}
+                </td>
+                <td>
+                  {{book.fine}}
+                </td>
+                <td>
+                <a href="/student/{{book.transID}}/{{book.userID}}/">Re-Issue</a> / 
+                <a href="/return/student/{{book.transID}}/{{book.userID}}/">Return </a>
+                </td>
+                </tr>
+                  {% endif %}
+                  
+                {% endfor %}
+              </table>
+        </div>
+        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" style="height:607px;">
+                      
+            <div class="add-book-form">
+            <p><b>Hey {{student.name}} !!</b></p>  
+            <p>Change password? Enter the details below </p>
+            <br>
+            <form action="/student/password/{{student.id}}" method="POST">
+                 <div class="container">              
+                  <div class="row mb-3">
+                    <label for="isbn" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name = "email" id="email">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="author" class="col-sm-2 col-form-label">New password</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name="new_pass" id="new_pass">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="author" class="col-sm-2 col-form-label">Confirm password</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" name="re_new_pass" id="re_new_pass">
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Change Password</button>
+            </form>
+            </div>        
+        </div>
+     </div>
+    </div>
+
+{% endblock %}
